@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador Aleatorio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .content {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          justify-content: top;
+          align-items: center;
+        }
+        #random-number {
+              font-size: 400px;
+              font-weight: bold;
+              background: #FAFCFE;
+              width: 60%;
+              margin: 60px auto;
+              max-width: 600px;
+              border-radius: 20px;
+              display: none;
+              color: black;
+              padding: 10px;
+        }
+        .btn {
+            background: green;
+            border-radius: 10px;
+            color: white;
+            padding: 20px 60px;
+            font-size: 40px;
+            border: solid;
+            border-color: green;
+            opacity: 0.8;
+            cursor: pointer;
+            width: 400px;
+        }
+        .btn:hover {
+            opacity: 1;
+        }
+          .show-text {
+            opacity: 1;
+            color: black !important;
+        }
+        .final-number {
+            color: black
+        }
+        .final-effect {
+            background-image: url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExem5hOXR1dDlwaTFyeGo1NGhlNDgxbGRpbGJsMnB4eTc1ZXh0Z2xrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/csKV5AUPzk2wToWEU7/giphy.gif) !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important; 
+            color: black;
+        }
+       .comedic-text {
+            font-size: 20px;
+            font-style: italic;
+            color: darkgreen !important;
+            display: none;
+        }
+        .accs {
+            font-size: 25px;
+            padding: 20px 0;
+        }
+        #progress-container {
+            width: 60%;
+            height: 30px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 600px;
+            position: absolute;
+            top: 145px;
+        }
+        #progress-bar {
+            height: 100%;
+            background-color: #75d879;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+        }
+        #progress-percent {
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h1>🐖🎁🎰🎲💰</h1>
+    <div class="accs">
+        <span id="acct"></span>
+    </div>
+    <div id="progress-container">
+         <div id="progress-bar"></div>
+    </div>
+    <div id="progress-percent"></div>
+    <button onclick="generateRandomNumber()" class="btn">GENERAR</button>
+    <div id="random-number">
+             <div id="final-number"></div>
+            <span id="comedic-text" class="comedic-text"></span>
+    </div>
+<div>
+    <script>
+        const maxTotal = 2346; 
+        const previousGenerated = [
+          6,10,24,28,42,54,78,82,88,90,92,96,8,84,68,26,94,14,22,12,60,70,46,36,18,50,44,86,16,30,58,48,56,32,74
+        ];
+        const previousSum = previousGenerated.reduce((acc, e) => { return acc + e }, 0);
+        const acct = document.getElementById("acct");
+         acct.textContent=`Acumulado: ${previousSum} de ${maxTotal} 💵`;
+         updateProgressBar(previousSum);
+         
+        function generateRandomNumber() {
+               let numbers = Array.from({ length: 46 }, (_, i) => 6 + i * 2);
+              numbers = numbers.filter(e => !previousGenerated.some(el => el == e));
+              const messages = [
+                  "Cada centavo cuenta, pero este número es oro puro! 💰✨",
+                  "Un paso más cerca de esas merecidas vacaciones 🌴✈️",
+                  "Tu viaje soñado se acerca con cada ahorro 🚢✈️",
+                  "El sacrificio de hoy es la recompensa de mañana. ¡Sigue guardando! 💵🔥",
+                  "Cada peso guardado es una piña colada en la playa 🍹🏝️",
+                  "¿Ya decidiste si irás a la montaña o al mar? 🏔️ vs 🏖️",
+                  "Poco a poco, tu maleta de sueños se llena 🧳💭",
+                  "Ahorra hoy, explora el mundo mañana ✈️🗺️",
+                  "Imagina todas las cosas increíbles que podrás hacer con este ahorro 🌍🏖️",
+                  "Este número es una inversión en tu felicidad futura 🌟💖"
+            ];
+            let i = 0;
+            const display = document.getElementById("random-number");
+            const numberSpan = document.getElementById("final-number");
+            const comedicText = document.getElementById("comedic-text");
+            
+            display.style.display="hide";
+            comedicText.textContent="";
+            display.style.display = "block"; 
+            display.classList.remove("final-effect");
+            comedicText.classList.remove("show-text"); 
+            const interval = setInterval(() => {
+                const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+                numberSpan.textContent = `${randomNumber}`;
+                const total = previousSum + randomNumber;
+                acct.textContent=`Acumulado: ${total} de ${maxTotal} 💵`;
+                updateProgressBar(total);
+                if (i >= 50) { 
+                    clearInterval(interval);
+                    console.log({ previousSum, total: previousSum + randomNumber });
+                    setTimeout(() => {
+                        display.classList.add("final-effect");
+                        comedicText.classList.add("show-text"); 
+                        comedicText.textContent = messages[Math.floor(Math.random() * messages.length)]; 
+                        comedicText.style.display = "block";
+                    }, 100);
+                    
+                    setTimeout(
+                    () => {
+                        display.classList.remove("final-effect");
+                    }, 3500)
+                }
+                i++;
+            }, 100);
+        }
+        
+        function updateProgressBar(current) {
+           const percent = Math.min((current / maxTotal) * 100, 100);
+          document.getElementById("progress-bar").style.width = `${percent}%`;
+          document.getElementById("progress-percent").textContent = ` 🚀 ${percent.toFixed(1)}%`;
+      }
+    </script>
+
+</body>
+</html>
+
