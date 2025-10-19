@@ -4,91 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador Aleatorio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .content {
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-          justify-content: top;
-          align-items: center;
-        }
-        #random-number {
-              font-size: 400px;
-              font-weight: bold;
-              background: #FAFCFE;
-              width: 60%;
-              margin: 60px auto;
-              max-width: 600px;
-              border-radius: 20px;
-              display: none;
-              color: black;
-              padding: 10px;
-        }
-        .btn {
-            background: green;
-            border-radius: 10px;
-            color: white;
-            padding: 20px 60px;
-            font-size: 40px;
-            border: solid;
-            border-color: green;
-            opacity: 0.8;
-            cursor: pointer;
-            width: 400px;
-        }
-        .btn:hover {
-            opacity: 1;
-        }
-          .show-text {
-            opacity: 1;
-            color: black !important;
-        }
-        .final-number {
-            color: black
-        }
-        .final-effect {
-            background-image: url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExem5hOXR1dDlwaTFyeGo1NGhlNDgxbGRpbGJsMnB4eTc1ZXh0Z2xrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/csKV5AUPzk2wToWEU7/giphy.gif) !important;
-            background-repeat: no-repeat !important;
-            background-size: cover !important; 
-            color: black;
-        }
-       .comedic-text {
-            font-size: 20px;
-            font-style: italic;
-            color: darkgreen !important;
-            display: none;
-        }
-        .accs {
-            font-size: 25px;
-            padding: 20px 0;
-        }
-        #progress-container {
-            width: 60%;
-            height: 30px;
-            background-color: #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            max-width: 600px;
-            position: absolute;
-            top: 145px;
-        }
-        #progress-bar {
-            height: 100%;
-            background-color: #75d879;
-            width: 0%;
-            transition: width 0.3s ease-in-out;
-        }
-        #progress-percent {
-            margin-top: 30px;
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-    </style>
+  <style>
+    :root {
+      --main-green: #2a9d8f;
+      --progress-green: #75d879;
+      --max-width: 600px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      background: #f4f7f9;
+      color: #111;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+    }
+
+    .accs {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      padding: 1rem 0;
+    }
+
+    #progress-container {
+      width: 90%;
+      max-width: var(--max-width);
+      height: 25px;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background-color: var(--progress-green);
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+
+    #progress-percent {
+      margin-top: 1rem;
+      font-weight: bold;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background: var(--main-green);
+      border-radius: 10px;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: clamp(1.2rem, 3.5vw, 2rem);
+      border: solid 2px var(--main-green);
+      opacity: 0.9;
+      cursor: pointer;
+      width: 80%;
+      max-width: 400px;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+    #random-number {
+      font-size: clamp(5rem, 25vw, 15rem);
+      font-weight: bold;
+      background: #fafcfe;
+      width: 90%;
+      max-width: var(--max-width);
+      margin: 2rem auto;
+      border-radius: 20px;
+      display: none;
+      color: black;
+      padding: 1rem;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+
+    .final-effect {
+      background-image: url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExem5hOXR1dDlwaTFyeGo1NGhlNDgxbGRpbGJsMnB4eTc1ZXh0Z2xrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/csKV5AUPzk2wToWEU7/giphy.gif) !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      color: black;
+    }
+
+    .comedic-text {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-style: italic;
+      color: darkgreen !important;
+      display: none;
+      padding: 0.5rem;
+    }
+
+    .show-text {
+      display: block;
+      opacity: 1;
+      transition: opacity 0.5s ease-in;
+    }
+
+    /* 📱 Responsividad adicional */
+    @media (max-width: 600px) {
+      .btn {
+        padding: 0.8rem 1.2rem;
+      }
+
+      #progress-container {
+        height: 20px;
+      }
+
+      #random-number {
+        border-radius: 15px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .btn {
+        width: 100%;
+      }
+
+      #random-number {
+        font-size: clamp(4rem, 30vw, 10rem);
+      }
+
+      .accs {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="content">
