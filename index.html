@@ -166,7 +166,7 @@
 <div>
     <script>
         const maxTotal = 2424; 
-        const previousGenerated = [];
+        const previousGenerated = [60];
         const previousSum = previousGenerated.reduce((acc, e) => { return acc + e }, 0);
         const acct = document.getElementById("acct");
          acct.textContent=`Acumulado: ${previousSum} de ${maxTotal} 💵`;
