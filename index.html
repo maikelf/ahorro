@@ -165,7 +165,7 @@
     </div>
 <div>
     <script>
-        const maxTotal = 2346; 
+        const maxTotal = 2424; 
         const previousGenerated = [];
         const previousSum = previousGenerated.reduce((acc, e) => { return acc + e }, 0);
         const acct = document.getElementById("acct");
@@ -173,7 +173,7 @@
          updateProgressBar(previousSum);
          
         function generateRandomNumber() {
-               let numbers = Array.from({ length: 46 }, (_, i) => 6 + i * 2);
+              let numbers = Array.from({ length: 48 }, (_, i) => 4 + i * 2);
               numbers = numbers.filter(e => !previousGenerated.some(el => el == e));
               const messages = [
                   "Cada centavo cuenta, pero este número es oro puro! 💰✨",
