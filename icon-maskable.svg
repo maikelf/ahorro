@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ahorro Maskable">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="25%" r="90%">
+      <stop offset="0%" stop-color="#ffc6e8"/>
+      <stop offset="40%" stop-color="#ff8b3d"/>
+      <stop offset="100%" stop-color="#23b495"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="154" fill="#ffffff" opacity="0.95"/>
+  <text x="256" y="296" text-anchor="middle" font-size="170" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif">💰</text>
+</svg>
