@@ -24,6 +24,8 @@
     body {
       font-family: "Inter", "Segoe UI", Arial, sans-serif;
       margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
       background:
         radial-gradient(circle at 8% 8%, #ffe8f5 0%, transparent 24%),
         radial-gradient(circle at 92% 12%, #fff1db 0%, transparent 24%),
@@ -34,6 +36,7 @@
 
     .page {
       min-height: 100vh;
+      min-height: 100dvh;
       display: grid;
       place-items: center;
       padding: 1.2rem;
@@ -253,6 +256,10 @@
         padding: 1.4rem 1rem;
       }
 
+      .page {
+        padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem max(0.75rem, env(safe-area-inset-bottom));
+      }
+
       .btn {
         padding: 0.88rem 1rem;
       }
@@ -273,6 +280,40 @@
 
       .accs {
         font-size: 0.98rem;
+      }
+    }
+
+    @media (max-height: 760px) {
+      .page {
+        align-items: start;
+      }
+
+      .content {
+        margin-top: 0.5rem;
+        padding: 1.2rem 0.9rem 1rem;
+        max-height: calc(100dvh - 1rem);
+        overflow-y: auto;
+      }
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 0.35rem;
+      }
+
+      .subtitle {
+        margin-bottom: 0.9rem;
+      }
+
+      .accs {
+        padding: 0.45rem 0 0.65rem;
+      }
+
+      #progress-percent {
+        margin-bottom: 0.85rem;
+      }
+
+      #random-number {
+        margin-top: 1rem;
       }
     }
   </style>
