@@ -6,110 +6,182 @@
     <title>Generador Aleatorio</title>
   <style>
     :root {
-      --main-green: #2a9d8f;
-      --progress-green: #75d879;
-      --max-width: 600px;
+      --bg: #f1f8ff;
+      --surface: #ffffff;
+      --text: #12212d;
+      --muted: #5a6b76;
+      --main-green: #23b495;
+      --main-green-dark: #1b8f77;
+      --main-orange: #ff8b3d;
+      --main-pink: #ff5ca8;
+      --main-blue: #4c79ff;
+      --progress-green: #8be45e;
+      --track: #dbe7f5;
+      --max-width: 620px;
+      --radius: 20px;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
       margin: 0;
-      background: #f4f7f9;
-      color: #111;
+      background:
+        radial-gradient(circle at 8% 8%, #ffe8f5 0%, transparent 24%),
+        radial-gradient(circle at 92% 12%, #fff1db 0%, transparent 24%),
+        radial-gradient(circle at 85% 90%, #dff4ff 0%, transparent 22%),
+        linear-gradient(180deg, #fbfdff 0%, var(--bg) 72%);
+      color: var(--text);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1.2rem;
+      box-sizing: border-box;
     }
 
     .content {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 2rem 1rem;
+      width: min(100%, var(--max-width));
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 2rem 1.2rem;
       box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 16px 42px rgba(38, 65, 102, 0.15);
+      border: 1px solid rgba(76, 121, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 7px;
+      background: linear-gradient(90deg, var(--main-pink), var(--main-orange), #f0d83d, var(--main-green), var(--main-blue));
     }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      margin-bottom: 1rem;
+      font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+      margin: 0.3rem 0 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+      font-size: clamp(0.9rem, 2vw, 1rem);
     }
 
     .accs {
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      padding: 1rem 0;
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      padding: 0.6rem 0 0.9rem;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #f9f3ff, #fff8ef);
+      border: 1px solid #f0e2ff;
     }
 
     #progress-container {
-      width: 90%;
-      max-width: var(--max-width);
-      height: 25px;
-      background-color: #e0e0e0;
-      border-radius: 15px;
+      width: 100%;
+      height: 18px;
+      background-color: var(--track);
+      border-radius: 999px;
       overflow: hidden;
-      margin-top: 1rem;
+      margin-top: 0.4rem;
       position: relative;
     }
 
     #progress-bar {
       height: 100%;
-      background-color: var(--progress-green);
+      background: linear-gradient(90deg, var(--main-pink) 0%, var(--main-orange) 35%, #f2d63c 62%, var(--progress-green) 80%, var(--main-green) 100%);
       width: 0%;
       transition: width 0.3s ease-in-out;
     }
 
     #progress-percent {
-      margin-top: 1rem;
+      margin-top: 0.6rem;
       font-weight: bold;
-      font-size: clamp(1rem, 3vw, 1.3rem);
-      margin-bottom: 1.5rem;
+      font-size: clamp(0.95rem, 2vw, 1.08rem);
+      margin-bottom: 1.2rem;
+      color: var(--muted);
     }
 
     .btn {
-      background: var(--main-green);
-      border-radius: 10px;
+      background: linear-gradient(180deg, #ff9864, var(--main-orange));
+      border-radius: 12px;
       color: white;
-      padding: 1rem 2rem;
-      font-size: clamp(1.2rem, 3.5vw, 2rem);
-      border: solid 2px var(--main-green);
-      opacity: 0.9;
+      padding: 0.95rem 1.4rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      border: solid 1px #e9782f;
       cursor: pointer;
-      width: 80%;
-      max-width: 400px;
-      transition: opacity 0.2s;
+      width: 100%;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 8px 16px rgba(255, 139, 61, 0.35);
     }
 
     .btn:hover {
-      opacity: 1;
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(255, 139, 61, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
     }
 
     #random-number {
-      font-size: clamp(5rem, 25vw, 15rem);
+      font-size: clamp(4.4rem, 20vw, 9rem);
       font-weight: bold;
-      background: #fafcfe;
-      width: 90%;
-      max-width: var(--max-width);
-      margin: 2rem auto;
-      border-radius: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #f3fbff 100%);
+      width: 100%;
+      box-sizing: border-box;
+      margin: 1.4rem auto 0.3rem;
+      border-radius: 18px;
       display: none;
-      color: black;
-      padding: 1rem;
+      color: var(--text);
+      padding: 0.8rem 0.7rem;
       word-wrap: break-word;
       overflow: hidden;
+      border: 1px solid rgba(76, 121, 255, 0.16);
+    }
+
+    #final-number {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 0.2em;
+      text-align: center;
+      line-height: 1;
     }
 
     .final-effect {
-      background-image: url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExem5hOXR1dDlwaTFyeGo1NGhlNDgxbGRpbGJsMnB4eTc1ZXh0Z2xrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/csKV5AUPzk2wToWEU7/giphy.gif) !important;
-      background-repeat: no-repeat !important;
-      background-size: cover !important;
-      color: black;
+      background: linear-gradient(120deg, #fff1e8, #ffe6f3, #eaf2ff) !important;
+      box-shadow: 0 0 0 4px rgba(255, 139, 61, 0.2), 0 8px 20px rgba(255, 92, 168, 0.2);
+      animation: pop 0.3s ease-out;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.98);
+      }
+      to {
+        transform: scale(1);
+      }
     }
 
     .comedic-text {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-size: clamp(0.92rem, 2vw, 1rem);
       font-style: italic;
-      color: darkgreen !important;
+      color: #d1498f !important;
       display: none;
-      padding: 0.5rem;
+      padding: 0.5rem 0.8rem 0.7rem;
+      font-weight: 500;
     }
 
     .show-text {
@@ -118,39 +190,98 @@
       transition: opacity 0.5s ease-in;
     }
 
+    #celebration-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 50;
+    }
+
+    .firework-core,
+    .firework-spark {
+      position: absolute;
+      border-radius: 999px;
+      will-change: transform, opacity;
+    }
+
+    .firework-core {
+      width: 10px;
+      height: 10px;
+      background: hsl(var(--hue), 96%, 64%);
+      box-shadow: 0 0 20px hsla(var(--hue), 96%, 64%, 0.95);
+      transform: translate(-50%, -50%);
+      animation: core-pop 460ms ease-out forwards;
+    }
+
+    .firework-spark {
+      width: 7px;
+      height: 7px;
+      left: var(--x);
+      top: var(--y);
+      background: hsl(var(--hue), 96%, 62%);
+      transform: translate(-50%, -50%);
+      animation: spark-burst 1000ms cubic-bezier(0.17, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes core-pop {
+      0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes spark-burst {
+      0% {
+        transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.3);
+        opacity: 0;
+      }
+    }
+
     /* 📱 Responsividad adicional */
     @media (max-width: 600px) {
+      .content {
+        border-radius: 16px;
+        padding: 1.4rem 1rem;
+      }
+
       .btn {
-        padding: 0.8rem 1.2rem;
+        padding: 0.88rem 1rem;
       }
 
       #progress-container {
-        height: 20px;
+        height: 16px;
       }
 
       #random-number {
-        border-radius: 15px;
+        border-radius: 14px;
       }
     }
 
     @media (max-width: 400px) {
-      .btn {
-        width: 100%;
-      }
-
       #random-number {
-        font-size: clamp(4rem, 30vw, 10rem);
+        font-size: clamp(3.8rem, 29vw, 8rem);
       }
 
       .accs {
-        font-size: 1rem;
+        font-size: 0.98rem;
       }
     }
   </style>
 </head>
 <body>
-<div class="content">
-    <h1>🐖🎁🎰🎲💰</h1>
+<main class="page">
+  <div class="content">
+    <h1>💰 Ahorro</h1>
+    <div class="subtitle">Genera el monto y mira tu progreso</div>
     <div class="accs">
         <span id="acct"></span>
     </div>
@@ -158,21 +289,120 @@
          <div id="progress-bar"></div>
     </div>
     <div id="progress-percent"></div>
-    <button onclick="generateRandomNumber()" class="btn">GENERAR</button>
+    <button onclick="generateRandomNumber()" class="btn">GENERAR MONTO</button>
     <div id="random-number">
              <div id="final-number"></div>
             <span id="comedic-text" class="comedic-text"></span>
     </div>
-<div>
+  </div>
+</main>
+<div id="celebration-layer"></div>
     <script>
         const maxTotal = 2424; 
         const previousGenerated = [60,68,8,38,62,80,88,74,10,34,50,98];
         const previousSum = previousGenerated.reduce((acc, e) => { return acc + e }, 0);
+        const celebrationLayer = document.getElementById("celebration-layer");
+        let audioCtx;
         const acct = document.getElementById("acct");
          acct.textContent=`Acumulado: ${previousSum} de ${maxTotal} 💵`;
          updateProgressBar(previousSum);
+
+        function getAudioContext() {
+          if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) {
+              return null;
+            }
+            audioCtx = new AudioContextClass();
+          }
+          return audioCtx;
+        }
+
+        function playCelebrationSound() {
+          const context = getAudioContext();
+          if (!context) {
+            return;
+          }
+
+          if (context.state === "suspended") {
+            context.resume();
+          }
+
+          const now = context.currentTime;
+          const notes = [523.25, 659.25, 783.99, 1046.5, 1318.51];
+
+          notes.forEach((frequency, index) => {
+            const oscillator = context.createOscillator();
+            const gainNode = context.createGain();
+
+            oscillator.type = index % 2 === 0 ? "triangle" : "sine";
+            oscillator.frequency.setValueAtTime(frequency, now + index * 0.06);
+
+            gainNode.gain.setValueAtTime(0, now + index * 0.06);
+            gainNode.gain.linearRampToValueAtTime(0.16, now + index * 0.06 + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, now + index * 0.06 + 0.28);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(context.destination);
+
+            oscillator.start(now + index * 0.06);
+            oscillator.stop(now + index * 0.06 + 0.3);
+          });
+        }
+
+        function createFireworkBurst(x, y, particles = 36) {
+          const hue = Math.floor(Math.random() * 360);
+
+          const core = document.createElement("span");
+          core.className = "firework-core";
+          core.style.left = `${x}px`;
+          core.style.top = `${y}px`;
+          core.style.setProperty("--hue", hue);
+          celebrationLayer.appendChild(core);
+          setTimeout(() => core.remove(), 500);
+
+          for (let index = 0; index < particles; index++) {
+            const angle = (Math.PI * 2 * index) / particles;
+            const distance = 70 + Math.random() * 110;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance;
+
+            const spark = document.createElement("span");
+            spark.className = "firework-spark";
+            spark.style.setProperty("--x", `${x}px`);
+            spark.style.setProperty("--y", `${y}px`);
+            spark.style.setProperty("--dx", `${dx}px`);
+            spark.style.setProperty("--dy", `${dy}px`);
+            spark.style.setProperty("--hue", hue + Math.floor(Math.random() * 35) - 17);
+            spark.style.opacity = `${0.7 + Math.random() * 0.3}`;
+            spark.style.animationDelay = `${Math.random() * 70}ms`;
+            celebrationLayer.appendChild(spark);
+            setTimeout(() => spark.remove(), 1100);
+          }
+        }
+
+        function launchFireworks() {
+          const bursts = 8;
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+
+          for (let burstIndex = 0; burstIndex < bursts; burstIndex++) {
+            setTimeout(() => {
+              const x = viewportWidth * (0.12 + Math.random() * 0.76);
+              const y = viewportHeight * (0.12 + Math.random() * 0.45);
+              createFireworkBurst(x, y, 34 + Math.floor(Math.random() * 14));
+            }, burstIndex * 130);
+
+            setTimeout(() => {
+              const x = viewportWidth * (0.18 + Math.random() * 0.64);
+              const y = viewportHeight * (0.16 + Math.random() * 0.42);
+              createFireworkBurst(x, y, 20 + Math.floor(Math.random() * 10));
+            }, burstIndex * 130 + 75);
+          }
+        }
          
         function generateRandomNumber() {
+            getAudioContext();
               let numbers = Array.from({ length: 48 }, (_, i) => 4 + i * 2);
               numbers = numbers.filter(e => !previousGenerated.some(el => el == e));
               const messages = [
@@ -192,7 +422,7 @@
             const numberSpan = document.getElementById("final-number");
             const comedicText = document.getElementById("comedic-text");
             
-            display.style.display="hide";
+            display.style.display = "none";
             comedicText.textContent="";
             display.style.display = "block"; 
             display.classList.remove("final-effect");
@@ -208,6 +438,8 @@
                     console.log({ previousSum, total: previousSum + randomNumber });
                     setTimeout(() => {
                         display.classList.add("final-effect");
+                        launchFireworks();
+                        playCelebrationSound();
                         comedicText.classList.add("show-text"); 
                         comedicText.textContent = messages[Math.floor(Math.random() * messages.length)]; 
                         comedicText.style.display = "block";
